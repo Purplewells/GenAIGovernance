@@ -1,0 +1,12 @@
+flowchart TD
+    patient[Patient] --> enquiry[Enquiry submission<br/>Website, portal, or SMS]
+    enquiry --> sanitise[Enquiry ingestion<br/>and sanitisation]
+    sanitise --> model[Generative AI model]
+    model --> decision{Can answer<br/>routine query?}
+    decision -->|Yes| response[Conversational response generated]
+    response --> sent[Response sent to patient]
+    decision -->|No or high uncertainty| escalation[Flag for escalation]
+    escalation --> review[PALS staff review]
+    review --> referral[Manual response<br/>or clinical referral]
+    sent --> outcome[Patient receives response or support]
+    referral --> outcome

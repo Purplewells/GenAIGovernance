@@ -1,0 +1,21 @@
+flowchart TD
+    subgraph EPR[Electronic Patient Record]
+        vitals[Vital signs<br/>Temperature, heart rate, blood pressure,<br/>respiratory rate, oxygen saturation]
+        observations[Observations<br/>Consciousness, urine output, clinical notes]
+        labs[Laboratory results<br/>Blood tests, chemistry]
+        events[Clinical events<br/>Falls, medication changes, infections]
+    end
+
+    vitals --> extract[Data extraction<br/>and cleaning]
+    observations --> extract
+    labs --> extract
+    events --> extract
+    extract --> features[Feature engineering<br/>and normalisation]
+    features --> model[Machine learning model]
+    model --> score[Risk score<br/>0 to 100 percent]
+    score --> threshold{Risk above<br/>threshold?}
+    threshold -->|Yes| alert[Clinician notification<br/>Ward system or alerting]
+    threshold -->|No| monitor[Continue routine monitoring]
+    alert --> assessment[Clinician assessment<br/>and action]
+    assessment --> outcome[Outcome documented<br/>in EPR]
+    monitor --> outcome
